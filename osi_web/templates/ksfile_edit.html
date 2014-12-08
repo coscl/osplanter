@@ -1,0 +1,77 @@
+{% extends 'master.html' %}
+{% block content %}
+
+    {% if not editable %}
+        <blockquote>
+            NOTE: You do not have permission to make changes to this
+            kickstart template and can only read it. It is possible that
+            other Cobbler users has secured permissions on Cobbler
+            profiles/systems that depend on this template -- changing this
+            template would ultimately affect those profile/system records which
+            you do not have access to. Alternatively, you may not have access
+            to edit *any* kickstart templates. Contact your Cobbler server administrator
+            if you need to resolve this.
+        </blockquote>
+        <br/>
+    {% else %}
+        <h1>{% ifequal editmode 'edit' %}编辑{% else %}添加{% endifequal %}模板</h1>
+        <hr/>
+        <form id="ksform" name="ksform" method="post" action="/ksfile/save">
+            {% csrf_token %}
+            <ol>
+                <li>
+                    <label for="ksdata">{% if ksfile_name %}编辑: {{ ksfile_name }}{% else %}文件名:{% endif %}</label>
+                    {% ifnotequal editmode 'edit' %}
+                        <input type="text" name="ksfile_name" id="ksfile_name"/>
+                        <span class="context-tip">例如:  foo.ks (to be saved in /var/lib/cobbler/kickstarts/)</span>
+                    {% else %}
+                        <input type="hidden" name="ksfile_name" value="{{ ksfile_name }}"/>
+                    {% endifnotequal %}
+                </li>
+                <li>
+                    <pre><textarea name="ksdata" id="ksdata">{{ ksdata }}</textarea></pre>
+                </li>
+                {% if deleteable %}
+                    <li>
+                        <input type="checkbox" id="delete1" name="delete1" value="delete1"/>
+                        <label class="delete" for="delete1">删除</label>
+                        <br>
+                    </li>
+                {% else %}
+                    {% ifequal editmode "edit" %}
+                        <li>
+                            <span class="warn">注意: 这个模板正在被使用.</span>
+                        </li>
+                    {% endifequal %}
+                {% endif %}
+                {% if editable %}
+                    <li>
+                        <input type="hidden" name="editmode" value="{{ editmode }}"/>
+                        <input class="button" type="submit" name="submit" value="确定" onclick="return btn_check()"/>
+                        <input class="button" type="reset" name="reset" value="重置"/>
+                    </li>
+                {% endif %}
+            </ol>
+        </form>
+    {% endif %}
+{% endblock content %}
+{% block scripts %}
+    <script language="JavaScript" type="text/javascript">
+        function btn_check() {
+            if ($('#delete1').attr('checked')) {
+                if (confirm("确认删除吗？")) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        }
+
+    </script>
+
+    <!--
+<script type="text/javascript" src='/static/js/system.js'></script>-->
+{% endblock %}

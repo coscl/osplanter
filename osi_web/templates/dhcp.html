@@ -1,0 +1,46 @@
+
+{% extends "master.html" %}
+
+{% block content %}
+<h1>基础配置</h1>
+<hr />
+<!--
+<div>
+    {{ dhcp_config }}
+<div>
+    <span>start:</span>
+    <span>{{dhcp_config.start }}<span>
+</div>
+<div>
+    <span>end:</span>
+    <span>{{dhcp_config.end }}<span>
+</div>
+<div>
+    <span>netmask:</span>
+    <span>{{dhcp_config.netmask }}<span>
+</div>
+<div>
+    <span>gateway:</span>
+    <span>{{dhcp_config.gateway }}<span>
+</div>
+<div>
+    <span>dns:</span>
+    <span>{{dhcp_config.dns }}<span>
+</div>
+-->
+<h2>DHCP配置</h2>
+<div>
+    {% if config_form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ config_form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+    <form action="./dhcp" method="POST">
+     {% csrf_token %}
+        <table id="dhcp_table">
+            {{config_form.as_table}}
+        </table>
+        <p style="padding-left:451px"><input class="button" type="submit" value="提交"></p>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "master.html" %}
+
+{% block content %}
+
+    <h1 class="error">Error</h1>
+
+    出现异常问题 清查看 /var/log/cobbler/cobbler.log
+
+    <p class="errormsg">{{ message }}</p>
+
+    <a href="javascript: history.go(-1)">Go Back</a>
+
+{% endblock content %}

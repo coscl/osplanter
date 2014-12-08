@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>{% block title %}osi管理平台{% endblock %}</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="all" href="/static/css/style.css" />
+
+    <link type="text/css" rel="stylesheet" href="/static/js/common/lazy_validateBox/lazy_validatebox.css">
+    <link type="text/css" rel="stylesheet" href="/static/js/common/lazy_panel/css/lazy_panel.css">
+    <link type="text/css" rel="stylesheet" href="/static/js/common/lazy_datagrid/icon.css">
+    <link type="text/css" rel="stylesheet" href="/static/js/common/lazy_datagrid/lazy_Datagrid.css">
+
+    <link type="text/css" rel="stylesheet" href="/static/js/common/lazy_selectbox/lazy_selectbox.css">
+
+    <link class="include" rel="stylesheet" type="text/css" href="/static/js/common/jquery-ui/css/smoothness/jquery-ui.css" />
+
+
+    <script type="text/javascript" src="/static/js/common/lib/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/common/lib/underscore.js"></script>
+	<script type="text/javascript" src="/static/js/common/lib/backbone.js"></script>
+	<script type="text/javascript" src="/static/js/common/lib/laconic.js"></script>
+	<script type='text/javascript' src='/static/js/common/lib/backbone_ui.js' ></script>
+	<script type="text/javascript" src="/static/js/common/lazy_validateBox/lazy_validatebox.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_panel/Lazy_Dialog.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_comboBox/Lazy_ComboBox.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_panel/Lazy_Mask.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_panel/Lazy_Tab.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_panel/Lazy_Wizard.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_datagrid/lazy_Pager.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_datagrid/lazy_Datagrid.js"></script>
+	<script type="text/javascript" src="/static/js/common/lazy_datagrid/tableManager.js"></script>
+
+	<script type="text/javascript" src="/static/js/common/lazy_selectbox/lazy_selectbox.js"></script>
+
+	<script type="text/javascript" src='/static/js/common/common.js'></script>
+<!--
+    <script src='/static/js/common/csrf_token_jquery_resolve.js' type='text/javascript'></script>
+    -->
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <div id="logo"><img src="/static/images/osi_logo.png" /></div>
+  </div>
+  <div id="body">
+    <div id="menubar">
+      <form id="menuaction" method="POST" action="">{% csrf_token %}</form>
+      <script type="text/javascript">
+      function menuaction(action) {
+         document.forms["menuaction"].action = action
+         document.forms["menuaction"].submit();
+      }
+      </script>
+      <h1>功能列表</h1>
+      <ul>
+        <li><a href="/setting/dhcp" class="edit">基础配置</a></li>
+        <li><a href="/distro/index" class="edit">发行版本</a></li>
+        <li><a href="/system/index" class="edit">主机配置</a></li>
+        <li><a href="/ksfile/list" class="edit">模板管理</a></li>
+        <li><a href="/events" class="edit">事件中心</a></li>
+
+      </ul>
+    </div>
+    <div id="content">
+  {% block content %}
+      <h1 class="error">Template Failure</h1>
+  {% endblock %}
+    </div> <!-- content -->
+    <div id="spacer">&nbsp</div>
+  </div> <!-- body -->
+  <div id="footer">
+    osi {{ version }}
+  </div>
+  <div id="jsGrowl"></div>
+</div> <!-- container -->
+</body>
+
+{% block scripts %}
+<!--custom scripts-->
+{% endblock %}
+</html>

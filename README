@@ -1,0 +1,11 @@
+steps
+1 yum install cobbler
+2 yum install pip
+3 pip install paramiko==1.15.0
+4 configure the cobbler,set the setting
+5 install the osi,use the rpm command
+6 restart the cobblerd
+7 open the browser input "http://[ip]/osi"
+
+websockify --web=/usr/share/novnc/ --target-config /usr/share/OSInstallTool/vnc_tokens 6080
+

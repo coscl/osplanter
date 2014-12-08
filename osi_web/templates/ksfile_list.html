@@ -1,0 +1,34 @@
+{% extends 'master.html' %}
+{% block content %}
+    <h1>模板管理</h1>
+    <hr/>
+
+    <ul id="submenubar">
+        <li><a class="action" href="/ksfile/edit">添加模板</a></li>
+    </ul>
+    <table id="listitems" cellspacing="0">
+    <thead>
+    <tr>
+        <th></th>
+        <th>文件</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for ksfile,shortname,option in ksfiles %}
+        <tr class="{% cycle 'rowodd' 'roweven' %}">
+        <td></td>
+        <td>{{ shortname }}</td>
+        {% if option %}
+            <td>
+            {% ifequal option "editable" %}
+                <span class="action" onClick="window.location='/ksfile/edit/file:{{ ksfile }}'">编辑</a> {% endifequal %}
+            {% ifequal option "viewable" %}<
+                span class="action" onClick="window.location='{{ ksfile }}'>View</a>{% endifequal %}
+            </td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock content %}

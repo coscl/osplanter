@@ -1,0 +1,38 @@
+{% extends "master.html" %}
+
+{% block content %}
+
+    <h1>事件中心</h1>
+    <hr/>
+    {% if results %}
+        <div style="background-color:#ffffff">
+            <table class="eventTable" id="listitems" cellspacing="0">
+            <thead>
+            <tr>
+                <th></th>
+                <th width="40%">开始时间</th>
+                <th width="20%">名称</th>
+                <th width="20%">状态</th>
+                <th width="20%">Log</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for line in results reversed %}
+                <tr class="{% cycle 'rowodd' 'roweven' %}">
+                    <td></td>
+                    <td>{{ line.1|safe }}</td>
+                    <td>{{ line.2|safe }}</td>
+                    <td>{{ line.3|safe }}</td>
+                    <td><a class="action" action="class" href="/eventlog/{{ line.0 }}">查看</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        </div>
+
+    {% else %}
+        <h2>No events</h2>
+    {% endif %}
+
+{% endblock %}

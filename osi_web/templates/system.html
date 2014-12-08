@@ -1,0 +1,102 @@
+{% extends "master.html" %}
+
+{% block content %}
+    <h1>主机探测</h1>
+    <hr/>
+    <div id="discover_hosts"></div>
+    <h1>主机池</h1>
+    <hr/>
+
+    <div>
+        {% if formset.errors %}
+            <p style="color: red;">
+                Please correct the error{{ formset.errors|pluralize }} below.
+            </p>
+        {% endif %}
+        <form action="./dhcp" method="POST">
+            {% csrf_token %}
+            <table>
+                {% for form in formset %}
+                    {{ form }}
+                {% endfor %}
+            </table>
+        </form>
+
+        <div id="systems"></div>
+        <div id="system_add_dialog" style="display: none">
+            <div class="input_line">
+                <span class="input_title">名称：</span>
+            <span>
+                <input type="text" id="hostname" class="cs2c_validatebox" validatetype="hostName" required>
+                <star style="color: red">*</star>
+            </span>
+            </div>
+            <div class="input_line">
+                <span class="input_title">发行版本：</span>
+            <span>
+                <select id="profile" required>
+
+                </select>
+                <star style="color: red">*</star>
+            </span>
+            </div>
+            <div class="input_line">
+                <span class="input_title">模板：</span>
+            <span>
+                <select id="ksfile" required>
+
+                </select>
+                <star style="color: red">*</star>
+            </span>
+            </div>
+            <div class="input_line" id="div_ip">
+                <span class="input_title">ip地址：</span>
+            <span>
+                <input type="text" id="ip" class="cs2c_validatebox" validatetype="ip" required>
+                <star style="color: red">*</star>
+            </span>
+            </div>
+            <div class="input_line" id="div_mac">
+                <span class="input_title">mac：</span>
+            <span>
+                <input type="text" id="mac" class="cs2c_validatebox" validatetype="mac" required disabled>
+                <star style="color: red">*</star>
+            </span>
+            </div>
+            <div class="input_line" id="div_autoreboot">
+                <span class="input_title">重启设置：</span>
+            <span>
+                <label><input type="radio" name="autoreboot" value="1" checked/>自动重启</label>
+                <label><input type="radio" name="autoreboot" value="0" />手动重启</label>
+
+            </span>
+            </div>
+        </div>
+    <div id="system_ksfile_dialog" style="display: none">
+        <pre><textarea name="ks_data" id="ks_data"></textarea></pre>
+    </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script language="JavaScript" type="text/javascript">
+        /*
+         $(function(){
+         $('#systems').datagrid({
+         //title:'My DataGrid',
+         //width:700,
+         //height:350,
+         pagination:true,
+         url : '/system/list',
+         method : 'get',
+         columns:[[
+         {field:'code',title:'Code',width:100},
+         {field:'name',title:'Name',width:100},
+         {field:'price',title:'Price',width:100,align:'right'}
+         ]]
+         });
+         });
+
+         */
+    </script>
+    <script type="text/javascript" src='/static/js/system.js'></script>
+{% endblock %}

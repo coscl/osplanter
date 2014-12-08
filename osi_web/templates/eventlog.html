@@ -1,0 +1,12 @@
+{% extends 'master.html' %}
+{% block content %}
+
+    <h1>{{ eventid }} : {{ eventname }} :: {{ eventstate }}</h1>
+    <hr/>
+    <textarea rows="40" cols="120" name="eventlog" id="eventlog" style="width:800px;height:400px">
+        {{ eventlog }}
+    </textarea>
+    <br/>
+    <a href="javascript:location.reload(true)">刷新</a>
+
+{% endblock content %}

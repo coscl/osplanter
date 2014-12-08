@@ -1,0 +1,504 @@
+@CHARSET "UTF-8";
+
+.cs2c_dialog {
+	background: #ffffff;
+	overflow: hidden;
+	position: absolute;
+	font-size:13px;
+	color:#333333;
+}
+
+.ui_left {}
+
+.ui_right {}
+
+.ui_top {}
+
+.ui_bottom {}
+
+.cs2c_dialog_header {
+	/* padding-left: 10px; */
+	font-weight:bold;
+	color: #000;
+	height:36px;
+	background-color:#d7d8db;
+	line-height: 36px;
+	font-size:13px;
+	color:#333333;
+}
+
+.cs2c_dialog_header span {
+	display:block;
+	float:left;
+	line-height:40px;
+	text-align:center;
+}
+
+.cs2c_dialog_header span.cs2c_dialog_header_icon{
+	height:18px;
+	width:18px;
+	margin-left:12px;
+	margin-top:11px;
+	margin-right:10px;
+}
+
+
+.cs2c_dialog_body {
+	padding-top:2px;
+	 margin: 10px 20px 10px 20px;
+	
+}
+
+/*输入框样式定义*/
+.cs2c_dialog .input_line{
+	
+	height:25px;
+	margin-top:16px;
+	width:450px;
+	
+}
+.cs2c_dialog .input_line span{
+	display:block;
+	float:left;
+}
+.cs2c_dialog .input_line .input_title{
+	width:120px;
+	height:25px;
+	line-height:25px;
+	display:block;
+	float:left;
+	text-align:right;
+	margin-right:12px;
+}
+
+.cs2c_dialog .input_line input[type="text"],.input_line input[type="password"]{
+	width: 230px;
+	height: 28px;
+}
+
+.cs2c_dialog .input_line select{
+	width:241.5px;
+	height:30px;
+}
+
+.cs2c_dialog .cs2c_dialog_button {
+	height:56px;
+   padding-top: 10px;
+	
+}
+
+/* 确定按钮样式 */
+.cs2c_dialog .cs2c_dialog_button div.l_btn_ok{
+	float:left;
+	height:38px;
+	width:90px;
+	margin-left:43%;
+	text-align:center;
+	color:#ffffff;
+	font-weight:bold;
+	line-height:38px;
+	cursor:pointer;
+	background-color:#FD4E4B;
+	border-radius:5px;
+}
+
+.cs2c_dialog .cs2c_dialog_button div.l_btn_ok:hover{
+	background-color:#f20606;
+}
+
+
+/* 取消按钮样式 */
+.cs2c_dialog .cs2c_dialog_button div.l_btn_cancel{
+	float:left;
+	height:38px;
+	width:90px;
+	margin-left:20px;
+	text-align:center;
+	color:#ffffff;
+	font-weight:bold;
+	line-height:38px;
+	cursor:pointer;
+	background-color:#cdced1;
+	border-radius:5px;
+}
+.cs2c_dialog .cs2c_dialog_button div.l_btn_cancel:hover{
+	background-color:#b9babd;
+}
+
+/* 确认对话框样式*/
+#lazy_confirm_dialog{
+	margin-top:10px;
+	/* height:53px; */
+}
+#lazy_confirm_dialog .confirm_dialog_icon{
+	display:block;
+	float:left;
+	height:36px;
+	width:36px;
+	margin:-3px 0 0 10px;
+	background:url('/static/images/icons/icon_alarm.png') no-repeat;
+}
+#lazy_confirm_dialog .confirm_dialog_message{
+	display:block;
+	/* float:left; */
+	margin-left:50px;
+	height:30px;
+	line-height:30px;
+	text-align:left;
+	font-size:14px;
+	font-weight: bold;
+	
+}
+
+
+
+
+
+
+.cs2c_dialog_header a {
+	position: absolute;
+	right: 8px;
+	top: 4px;
+	display: block;
+	height: 21px;
+	opacity: 0.6;
+	width:21px;
+}
+
+.cs2c_dialog_close_btn {
+	background: url("../images/panel_tools.gif") no-repeat scroll -18px 5px
+		transparent;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+/* .cs2c_dialog_button a ,.cs2c_page_line_button a,.cs2c_page_button a{
+	margin:8px 10px;
+	color: #000;
+	border: 1px solid #999;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	height: 24px;
+	outline: medium none;
+	text-decoration: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background: -moz-linear-gradient(top, #ebebeb, #b9b9b9);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ebebeb),
+		to(#b9b9b9));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ebebeb,
+		endColorstr=#b9b9b9, gradientType=0);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	overflow:hidden;
+} */
+
+
+.cs2c_dialog_shadow {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.3;
+	filter: alpha(opacity = 30);
+	display: none;
+	z-index: 1005;
+}
+
+.dialog-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: rgba(255,255,255,0);
+	opacity: 0.3;
+	display: none;
+	cursor: wait;
+}
+
+.dialog-mask-msg {
+	position: absolute;
+	cursor: wait;
+	width: auto;
+	height: 48px;
+	line-height:40px;
+	padding: 12px 15px 10px 40px;
+	background: url('../images/loading2.gif') no-repeat scroll 0px 13px rgba(255,255,255,0);
+	color: #222;
+	display: none;
+	border-radius:5px;
+}
+
+.dialog-mask-label{
+	margin-left:12px;
+	margin-top:5px;
+}
+
+/* .cs2c_dialog_close_btn{
+background: url("../images/panel_tools.gif") no-repeat scroll -16px 0 transparent;
+} */
+/* .cs2c_wizard_dialog_banner {
+	position: relative;
+	overflow:hidden;
+	background:url("../images/wizard_2.gif") repeat-x;
+	margin: 5px;
+	border-right:1px solid #b1b1b1;
+	border-left:1px solid #b1b1b1;
+	border-radius:4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	
+}
+
+.cs2c_wizard_dialog_banner_span {
+	float:left;	
+} */
+
+
+
+/*----------------------向导------------------------------------*/
+.cs2c_wizard{
+	padding:0;
+	width:100%;
+}
+.cs2c_wizard_dialog_banner{
+	position: relative;
+	overflow:hidden;
+	height:50px;
+}
+
+.cs2c_wizard_dialog_banner_unit{
+	float:left;
+	height:50px;
+	color: #d3d3d3;
+}
+
+.cs2c_wizard_dialog_banner_unit .banner_unit_text{
+	height:25px;
+	line-height:25px;
+	width:100%;
+	text-align:center;
+}
+
+.cs2c_wizard_dialog_banner_unit .banner_unit_index_container{
+	height:25px;
+	line-height:25px;
+	width:100%;
+	text-align:center;
+}
+
+.cs2c_wizard_dialog_banner_unit .banner_unit_index_container span{
+	display:block;
+	float:left;
+}
+
+.cs2c_wizard_dialog_banner_unit .banner_unit_index_container span.banner_unit_index_left{
+	height:2px;
+	background-color:#d3d3d3;
+	margin-top:6px;
+}
+.cs2c_wizard_dialog_banner_unit .banner_unit_index_container span.banner_unit_index_center{
+	margin-left:-51%;
+	/* margin-right:-2px; */
+	width:10px;
+	height:10px;
+	background-color: #d3d3d3; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	border-radius: 5px; 
+	margin-top:2px;
+}
+.cs2c_wizard_dialog_banner_unit .banner_unit_index_container span.banner_unit_index_right{
+	height:2px;
+	/* margin-left:-5px; */
+	background-color:#d3d3d3;
+	margin-top:6px;
+}
+/*当前向导页样式*/
+.cs2c_wizard_dialog_banner_unit.thisStep .banner_unit_text{
+	color:#2F3436;
+}
+
+.cs2c_wizard_dialog_banner_unit.thisStep .banner_unit_index_container span.banner_unit_index_center{
+	background-color:#696969;
+}
+
+/*第一步向导页样式*/
+.cs2c_wizard_dialog_banner_unit.firstStep .banner_unit_index_left{
+	opacity: 0; 
+}
+
+/*最后一步向导样式*/
+.cs2c_wizard_dialog_banner_unit.lastStep .banner_unit_index_right{
+	opacity: 0; 
+}
+
+.cs2c_wizard_dialog_ctx {
+	margin-left:5%;
+	margin-right:5%;
+	overflow-y:auto; 
+}
+
+.cs2c_wizard .cs2c_dialog_button {
+	height: 56px;
+	padding-top:15px;
+	width:254px;
+	margin-right:50px;
+	float:right;
+}
+.cs2c_wizard .cs2c_dialog_button a{
+	cursor: pointer;
+	color:#333333;
+	display: inline-block;
+	font-size: 13px;
+	height: 30px;
+	line-height:30px;
+	text-algin:center;
+	width:70px;
+	outline: medium none;
+	text-decoration: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	
+	background-color:＃F9F9F9;
+	overflow:hidden;
+	margin-right:12px;
+	font-weight:bold;
+	color: #FFFFFF;
+}
+
+.cs2c_wizard .cs2c_dialog_button a.down,a.up,a.ok{
+	
+	background-color: #FD4E4B;
+	border:1px solid #FD4E4B;
+  /*  border:1px solid #bfbfbf; */
+    
+}
+.cs2c_wizard .cs2c_dialog_button a.cancel{
+	background-color: #CDCED1;
+	border:1px solid #CDCED1;
+}
+.cs2c_wizard .cs2c_dialog_button a span{
+	display:inline-block;
+	width:100%;
+	height:100%;
+	text-align:center;
+	cursor:pointer;
+}
+.cs2c_wizard .cs2c_dialog_button a.down:hover{
+	background-color:#f20606; 
+}
+.cs2c_wizard .cs2c_dialog_button a.up:hover{
+	background-color:#f20606; 
+}
+.cs2c_wizard .cs2c_dialog_button a.ok:hover{
+	background-color:#f20606; 
+}
+.cs2c_wizard .cs2c_dialog_button a.cancel:hover{
+	background-color:#b9babd; 
+}
+
+/* .cs2c_wizard_dialog_banner_span span{
+	display:block;
+	line-height:28px;
+	padding:0 25px 0 15px;
+	background:url("../images/wizard_1.gif") right no-repeat;
+} */
+/* .prevText span {	
+	background:url("../images/wizard_5.gif") right no-repeat;
+} */
+/* .redText {
+	background:url("../images/wizard_4.gif") repeat-x;
+}
+.redText span {	
+	background:url("../images/wizard_3.gif") right no-repeat;
+}
+
+.lastText span {	
+	background:none;
+} */
+
+
+
+.cs2c_show_tab {
+	color: blue;
+}
+
+.cs2c_tab {
+	overflow: hidden;
+	height: 100%;
+}
+.cs2c_dialog .cs2c_tab{
+	background:none;
+	border: 0;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-border-radius: none;
+}
+.cs2c_tab_btn {
+	color: #000;
+	display: inline-block;
+	height: 26px;
+	line-height: 23px;
+	margin: 0 2px 0 2px;
+	padding: 5px 20px 0 20px;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	border-bottom: none;
+	cursor: pointer;
+}
+
+.cs2c_tab_title {
+	border-bottom: 1px solid #e6e6e6;
+	height: 36px;
+   line-height: 36px;
+	font-size:14px;
+}
+.cs2c_dialog .cs2c_tab_title{
+	background:none;
+	
+}
+/*.cs2c_tab_btn:hover {
+	background: -moz-linear-gradient(top, #eeeeee, #9a9a9a);
+	font-weight:bold;
+}
+*/
+.cs2c_tabs_selected {
+	font-weight:bold;
+	border-bottom:3px solid #ff5959;
+}
+
+.cs2c_tab_ctx {		
+	height: 90%;
+	overflow: auto;
+	padding: 10px;
+}
+/* 信息提示框的样式 */
+.cs2c_message {
+	position: absolute;
+	padding: 10px;
+	border: 1px solid #000000;
+	overflow: hidden;
+	max-width: 500px;
+	width: 300px;
+	min-height: 30px;
+	line-height: 30px;
+	background-color: #000000;
+	text-align: center;
+	display: none;
+	top: 100px;
+	opacity: 0.5;
+	color:#ffffff;
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=GB2312" />
+<meta http-equiv="X-UA-Compatible" value="IE=edge" />
+<title>Lazy_Tree</title>
+
+<script src='../lib/jquery.js' type='text/javascript'></script>
+<script src='../lib/underscore.js' type='text/javascript'></script>
+<script src='../lib/backbone.js' type='text/javascript'></script>
+
+<link rel="StyleSheet" href="lazy_tree.css" type="text/css" />
+<script src='lazy_tree.js' type='text/javascript'></script>
+<script src='lazy_rightMenu.js' type='text/javascript'></script>
+<style>
+	
+</style>
+</head>
+
+<body>
+<div id="cs2c_dtree" style="font-family:Verdana"></div>
+<!-- yanghong added! -->
+<script type="text/javascript">
+		
+		tempModes=[
+					{ "content":"超级管理组", "id":"1", "pid":"-1", "model":{"name":"超级管理组", "type":"admin"}},
+					{ "content":"系统管理组", "id":"11", "pid":"1", "model":{"name":"系统管理组", "type":"admin"}},
+					{ "content":"普通用户组_update", "id":"14", "pid":"1", "model":{"name":"普通用户组_update", "type":"admin"}},
+					{ "content":"系统用户子组1_ppppp", "id":"111", "pid":"11", "model":{"name":"系统用户子组1_ppppp", "type":"other"}},
+					{ "content":"系统用户子组2", "id":"112", "pid":"11", "model":{"name":"系统用户子组2", "type":"other"}},
+					{ "content":"普通用户子组1", "id":"141", "pid":"14", "model":{"name":"普通用户子组1", "type":"other"}},
+					{ "content":"普通用户子组2", "id":"142", "pid":"14", "model":{"name":"普通用户子组2", "type":"other"}},
+					{ "content":"普通用户子组3", "id":"143", "pid":"14", "model":{"name":"普通用户子组3", "type":"other"}},
+					//{ "content":"普通用户1", "id":"1421", "pid":"142", "model":{"name":"普通用户1", "type":"other"}},
+					//{ "content":"普通用户2", "id":"1422", "pid":"142", "model":{"name":"普通用户2", "type":"other"}},
+					{ "content":"普通用户3", "id":"1431", "pid":"143", "model":{"name":"普通用户3", "type":"other"}},
+					//{ "content":"guest2_sub1_sub1_r", "id":"14228", "pid":"1421", "model":{"name":"guest2_sub1_sub1_r", "type":"other"}},
+					//{ "content":"guest2_sub1_sub2_r", "id":"14227","pid":"1422", "model":{"name":"guest2_sub1_sub2_r", "type":"other"}}
+				];
+		
+		order=0;
+		var dtree=null;
+		
+		var deleteNode=function(){
+			alert(dtree.getSelected().length);
+
+			var deletemodel={childList:[14,15],childNum:2,content:"ttttttt",id:"notExist",
+					model:{name:"ttttttt",index:5}};
+
+			dtree.deleteNode(dtree.getSelected()[0]);
+		};
+	    var addNode1=function (data){
+			//alert("add");
+			temp ={ "content":"新节点2", "id":"14230","pid":"1421", "model":{"name":"新节点2", "type":"other"}};
+			dtree.addNode({ "content":"新节点1", "id":"14229", "pid":"1421", "model":{"name":"新节点1", "type":"other"}});
+			tempfunc=function(temp){dtree.addNode(JSON.parse(temp));};
+			setTimeout("tempfunc('"+JSON.stringify(temp)+"')",500)
+			//dtree.addNode({ "content":"新节点2", "id":"1420","pid"1421", "model":{"name":"新节点2", "type":"other"}});
+			//dtree.addNode({ "content":"guest2_sub1_sub2_r", "id":"14229", "pid":"1421", "model":{"name":"guest2_sub1_sub2_r", "type":"other"}})
+			//order=(order+1)%6;
+		};
+		
+	    var addNode2=function (data){
+			//alert("add");
+			
+			dtree.addNode({ "content":"新节点25", "id":"14235","pid":"14", "model":{"name":"新节点2", "type":"other"}})
+			//order=(order+1)%6;
+		};
+		 var addNode3=function (data){
+				//alert("add");
+				
+				dtree.addNode({ "content":"优先节点", "id":"14231","pid":"1421","priority":"top", "model":{"name":"优先节点", "type":"other"}})
+				//order=(order+1)%6;
+		};
+		
+		var getChildren=function(){
+			//console.log(dtree.selectedNode)
+			if(dtree.selectedNode){
+				alert(JSON.stringify(dtree.getChildren(dtree.allNodes[dtree.selectedNode])));
+			}
+			
+		};
+		
+		var getAllChildren=function(){
+			if(dtree.selectedNode){
+				alert(JSON.stringify(dtree.getAllChildren(dtree.allNodes[dtree.selectedNode])));
+			}
+		};
+			
+		var getSelected=function(){
+			alert(JSON.stringify(dtree.getSelected()))
+		};
+		
+		var updateNode=function(){
+			//{ "content":"普通用户组_update", "id":"14", "pid":"1", "model":{"name":"普通用户组_update", "type":"admin"}},
+			//dtree.updateNode({ "content":"普通用户组_update", "id":"14", "pid":"1", "model":{"name":"普通用户组_update", "type":"admin"}},)
+		};
+		
+		var closeAll=function(){
+			//dtree.closeAll();
+			dtree.closeAll();
+		};
+		
+		var openAll=function(){
+			dtree.openAll();
+		};
+		
+		var itemClick=function(){
+			//dtree.itemClick(2);
+			/* console.log(dtree.allNodes) */
+			dtree.selectNode(11,"index");
+		};
+		
+		var getCurrentNode=function(){
+			alert(dtree.getCurrentNode())
+		}
+		
+		var updateTree=function(){
+			dtree.options.list=function(){
+				return tempModes;
+			}
+			dtree.dynamicUpdate();
+		}
+		
+		var func1=function(model){			
+			$(dtree.el+"_rightMenu").hide();
+			alert("func1:"+model.name);
+		};
+		
+		var func2=function(model){
+			$(dtree.el+"_rightMenu").hide();
+			alert("func2:"+model.name);
+			
+		};
+		
+		var func3=function(model){
+			$(dtree.el+"_rightMenu").hide();
+			alert("func3:"+model.name);
+		};
+		
+		var func4=function(model){
+			$(dtree.el+"_rightMenu").hide();
+			alert("func4:"+model.name);
+		};
+		var func5=function(model){
+			$(dtree.el+"_rightMenu").hide();
+			alert("func5:"+model.name);
+		};
+		
+    $(window).load(function() {
+	
+	
+     dtree = new Lazy_Tree({
+		  baseEl:"#cs2c_dtree",
+		  
+		  showCheckbox:false,
+		  imgPosition:"",
+		  //objName:"dtree1",
+		  list:function(){
+			  return [
+				{ "content":"超级管理组", "id":"1", "pid":"-1", "model":{"name":"超级管理组", "type":"admin"}},
+				{ "content":"系统管理组", "id":"11", "pid":"1", "model":{"name":"系统管理组", "type":"admin"}},
+				{ "content":"安全管理组", "id":"12", "pid":"1", "model":{"name":"安全管理组", "type":"admin"}},
+				{ "content":"审计管理组", "id":"13", "pid":"1", "model":{"name":"审计管理组", "type":"admin"}},
+				{ "content":"普通用户组", "id":"14", "pid":"1", "model":{"name":"普通用户组", "type":"admin"}},
+				{ "content":"系统用户子组1", "id":"111", "pid":"11", "model":{"name":"系统用户子组1", "type":"other"}},
+				{ "content":"系统用户子组2", "id":"112", "pid":"11", "model":{"name":"系统用户子组2", "type":"other"}},
+				{ "content":"普通用户子组1", "id":"141", "pid":"14", "model":{"name":"普通用户子组1", "type":"other"}},
+				{ "content":"普通用户子组2", "id":"142", "pid":"14", "model":{"name":"普通用户子组2", "type":"other"}},
+				{ "content":"普通用户子组3", "id":"143", "pid":"14", "model":{"name":"普通用户子组3", "type":"other"}},
+				{ "content":"普通用户1", "id":"1421", "pid":"142", "model":{"name":"普通用户1", "type":"other"}},
+				{ "content":"普通用户2", "id":"1422", "pid":"142", "model":{"name":"普通用户2", "type":"other"}},
+				{ "content":"普通用户3", "id":"1431", "pid":"143", "model":{"name":"普通用户3", "type":"other"}},
+				//{ "content":"guest2_sub1_sub1_r", "id":"14228", "pid":"1421", "model":{"name":"guest2_sub1_sub1_r", "type":"other"}}
+				//{ "content":"guest2_sub1_sub1_r", "id":"14228", "pid":"1421", "model":{"name":"guest2_sub1_sub1_r", "type":"other"}}
+			]
+		  },
+				
+          
+          onItemClick:function(model) {
+		  
+			//弹出显示内容
+            //alert(model.content);   
+			//弹出选中节点的子节点
+			//alert(JSON.stringify(dtree.getChildren(model).length));
+			//console.log(model);
+				/* console.log(model); */
+			
+          },
+		  
+		  rightMenu:{
+		  
+		    list:[
+					[
+						{"optName":"修改备注名称", "optParam":"j1"},
+						{"optName":"举报此用户","optParam":"2"},
+						{"optName":"发送电子邮件","optParam":"3"}
+					],
+					[
+						{"optName":"会员快捷功能","optParam":"4","children":[
+							{"optName":"设置好友铃音","optParam":"41"},
+							{"optName":"设置QQ装扮","optParam":"42"},
+							{"optName":"好友上线通知","optParam":"43"}
+						]},
+						{"optName":"进入QQ空间","optParam":"5"}
+					]
+				
+				],
+				
+			optFunc:function(param,model){
+				/* console.log(param);
+				console.log(model); */
+				
+			}
+		  
+		  },
+		  
+		  onRightClick:function(){
+			
+			
+			
+		  }
+		  
+        });	   
+	});	
+	
+	/*
+	var strAppend="<span onclick='javascript: del("+JSON.stringify({"name":"noyes"})+")' style='cursor:pointer'>"
+				+"<img src='img/plus.gif'/>"
+				+"<img src='img/page.gif'/>"
+				+"</span><br>"
+
+	
+	$("#cs2c_dtree").append(strAppend);
+    });
+	*/
+	
+	var test= function(index){
+	 
+	 // console.log(index == 2);
+	 // console.log(index!==null);
+	  //console.log(index)
+	  index=null;
+	  /* console.log(index ==undefined)
+	  console.log(typeof index == "undefined") */
+	
+	}
+	
+	//var test11=test;
+	
+	//test("");
+	test(0);
+	//test11("test11")
+	
+  </script>
+  
+ 
+ <div id="mm" class="cs2c_options" style="margin-top:20px">
+	<div>
+		<input type="button" value="添加普通节点1" onclick="addNode1()" /> 
+		<input type="button" value="添加普通节点2" onclick="addNode2()" /> 
+		<input type="button" value="添加优先节点" onclick="addNode3()" /> 
+		<input type="button" value="删除" onclick="deleteNode()" />
+		<input type="button" value="获取子节点" onclick="getChildren()" />
+		<input type="button" value="获取子孙节点" onclick="getAllChildren()" />
+		<input type="button" value="获取选中节点" onclick="getSelected()" />
+		<input type="button" value="编辑" onclick="updateNode()" />
+		<input type="button" value="关闭树" onclick="closeAll()" />
+		<input type="button" value="展开树" onclick="openAll()" />
+		<input type="button" value="点击某一行" onclick="itemClick()" />
+		<input type="button" value="获取被点击行节点" onclick="getCurrentNode()" />
+		<input type="button" value="刷新整棵树" onclick="updateTree()" />
+	</div>
+	
+</div>
+
+<!--右键菜单-->
+<div id="PopMenu" style="position:absolute; visibility: hidden; border:solid 1px; background:yellow; width:200px">
+	
+		<ul class="ul_rightMenu">
+			<li class="li_right_rline">编辑信息</li>
+			<li class="li_right_rline">改变所属组"</li>
+			<li class="li_right_rline">服务配置</li>
+			<li class="li_right_nline">----------------</li>
+			<li class="li_right_rline">命令配置</li>
+		</ul>
+		
+		
+	
+		
+
+	</div>
+</body>
+</html>
